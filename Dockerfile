@@ -4,4 +4,4 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-CMD ["python", "cookbook.py"]
+CMD ["python3", "cookbook.py"]
