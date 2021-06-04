@@ -102,7 +102,7 @@ food_starch()
 def cocoa():
   fc.typingPrint("Hast du 50g Kakaopulver? (j) (n)")
   cocoa = input().lower()
-  fc.ingredients_check("Kakao", cocoa)
+  fc.ingredients_check("Kakaopulver", cocoa)
 cocoa()
 
 def baking_powder():
@@ -147,6 +147,17 @@ fc.typingPrint(f"Das waren alle Zutaten, dir fehlen noch: {len(fc.ingredients)} 
 for ingredients in fc.ingredients:
   fc.typingPrint(ingredients)
     
-
+if fc.ingredients is not None: 
+  fc.typingPrint("Lass uns die fehlenden Zutaten einkaufen!")
+  print('''
+           _
+             \________
+          ~   \######/       
+            ~  |####/
+          ~    |____.
+          ______o____o__________ 
+                                \_______
+                      ''')
+  fc.timer('Einkaufen')
 
 #print("")
