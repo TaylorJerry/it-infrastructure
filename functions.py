@@ -22,6 +22,9 @@ def ingredients_check(ingredient, user_input):
   elif user_input == 'n':
     ingredients.append(ingredient)
 
+  #elif user_input == 'c':
+  #  cb.menu()
+
   else:
     typingPrint("Falsche Eingabe, versuch es noch einmal (j) (n):")
     new_input = input().lower()
@@ -38,3 +41,20 @@ def timer(task):
         time.sleep(1)
 
     sys.stdout.write("\rFertig!\n")
+
+def loading_animation(wait_time):
+  bar = [
+    " [=     ]",
+    " [==    ]",
+    " [ ==   ]",
+    " [  ==  ]",
+    " [   == ]",
+    " [    ==]",
+    " [     =]",
+  ]
+  i = 0
+
+  for x in range(wait_time, 0, -1):
+      print(bar[i % len(bar)], end="\r")
+      time.sleep(.1)
+      i += 1
