@@ -179,7 +179,8 @@ def ingredients_list():
 ingredients_list()
 
 def shopping():
-  current_step = shopping()
+  #current_step = shopping()
+  current_step = "shopping"
   fc.typingPrint(f"Das waren alle Zutaten, dir fehlen noch: {len(fc.ingredients)} Zutaten")
   for ingredients in fc.ingredients:
     fc.typingPrint(ingredients)

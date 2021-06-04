@@ -33,14 +33,13 @@ def ingredients_check(ingredient, user_input):
 
 # TODO: Counter Function for time
 def timer(task):
-    typingPrint(f"{task} dauert noch:")
     for remaining in range(10, 0, -1):
         sys.stdout.write("\r")
-        sys.stdout.write("{:2d} Minuten".format(remaining))
+        sys.stdout.write("{task} dauert noch{count:2d} Minuten...".format(task=task, count=remaining))
         sys.stdout.flush()
         time.sleep(1)
 
-    sys.stdout.write("\rFertig!\n")
+    sys.stdout.write("\nFertig!\n")
 
 def loading_animation(wait_time):
   bar = [
@@ -56,5 +55,5 @@ def loading_animation(wait_time):
 
   for x in range(wait_time, 0, -1):
       print(bar[i % len(bar)], end="\r")
-      time.sleep(.1)
+      time.sleep(0.3)
       i += 1
