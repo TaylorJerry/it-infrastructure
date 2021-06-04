@@ -12,7 +12,7 @@ def typingPrint(text):
   for character in text:
     sys.stdout.write(character)
     sys.stdout.flush()
-    time.sleep(0.04)
+    time.sleep(0.01)
   print()
 
 def ingredients_check(ingredient, user_input):
@@ -29,3 +29,12 @@ def ingredients_check(ingredient, user_input):
 
 
 # TODO: Counter Function for time
+def timer(task):
+    typingPrint(f"{task} dauert noch:")
+    for remaining in range(10, 0, -1):
+        sys.stdout.write("\r")
+        sys.stdout.write("{:2d} Minuten".format(remaining))
+        sys.stdout.flush()
+        time.sleep(1)
+
+    sys.stdout.write("\rFertig!\n")
