@@ -1,4 +1,5 @@
 #from functions import print_menu
+#import typing_extensions
 import functions as fc
 
 print(r"""\
@@ -47,22 +48,52 @@ fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist
 input_name = input()
 fc.typingPrint(f"Wilkommen {input_name}!")
 
-fc.typingPrint(fc.print_menu())
+def menu():
+  fc.typingPrint("Menü\n(S)tarten   (E)rklärung   (...)")
+  menu_selection = input().lower()
 
-menu_selection = input()
-if menu_selection == 'E':
-  text = '''
-        Arbeitszeit: 60 min
-        Backen: 20 min
-        Kühlen: 45 min
-        Schwierigkeit: Mittel
-        Link zum online Rezept: https://www.einfachbacken.de/rezepte/schwarzwaelder-kirschtorte-das-klassische-rezept
-        '''
-            #Schwarzwälder Kirschtorte gehört einfach zu den beliebtesten Klassiker-Rezepten.
-            #Wir haben ein ganz einfaches und gelingsicheres Rezept für den Klassiker entwickelt,
-            #mit dem auch du die perfekte Schwarzwälder Kirschtorte zaubern kannst.
-  fc.typingPrint(text)
+  if menu_selection == 'e':
+      text = '''
+            Arbeitszeit: 60 min
+            Backen: 20 min
+            Kühlen: 45 min
+            Schwierigkeit: Mittel
+            Link zum online Rezept: https://www.einfachbacken.de/rezepte/schwarzwaelder-kirschtorte-das-klassische-rezept
+            '''
+                #Schwarzwälder Kirschtorte gehört einfach zu den beliebtesten Klassiker-Rezepten.
+                #Wir haben ein ganz einfaches und gelingsicheres Rezept für den Klassiker entwickelt,
+                #mit dem auch du die perfekte Schwarzwälder Kirschtorte zaubern kannst.
+      print(text)
+      menu()
+
+  elif menu_selection == 's':
+      fc.typingPrint("Wir starten mit der Zutatenliste!")
+
+  else: 
+    fc.typingPrint("Falsche Eingabe, versuch es noch einmal")
+    menu()
+
+menu()
+
+def eggs():
+  fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  eggs = input().lower()
+  fc.ingredients_check("Eier", eggs)
 
 
 
-print("")
+eggs()
+  
+
+
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+  #fc.typingPrint("Hast du 6 Eier? (j) (n)")
+
+
+
+#print("")
