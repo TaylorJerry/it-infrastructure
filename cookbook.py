@@ -1,4 +1,5 @@
-print("Hello Docker World")
+#from functions import print_menu
+import functions as fc
 
 print(r"""\
 
@@ -41,10 +42,27 @@ print(r"""\
 """)
 
 #Simple Text input from shell
-print("What is your name?")
+fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist dein Name?")
+
 input_name = input()
-print(f"Hello {input_name}")
+fc.typingPrint(f"Wilkommen {input_name}!")
 
-print("60 Punkte IT Infrastrukturen!")
+fc.typingPrint(fc.print_menu())
 
-print("Test Docker pipeline")
+menu_selection = input()
+if menu_selection == 'E':
+  text = '''
+        Arbeitszeit: 60 min
+        Backen: 20 min
+        Kühlen: 45 min
+        Schwierigkeit: Mittel
+        Link zum online Rezept: https://www.einfachbacken.de/rezepte/schwarzwaelder-kirschtorte-das-klassische-rezept
+        '''
+            #Schwarzwälder Kirschtorte gehört einfach zu den beliebtesten Klassiker-Rezepten.
+            #Wir haben ein ganz einfaches und gelingsicheres Rezept für den Klassiker entwickelt,
+            #mit dem auch du die perfekte Schwarzwälder Kirschtorte zaubern kannst.
+  fc.typingPrint(text)
+
+
+
+print("")
