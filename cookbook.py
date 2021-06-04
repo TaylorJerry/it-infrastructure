@@ -2,6 +2,7 @@
 #import typing_extensions
 import functions as fc
 
+# TODO: Das mit dem current_step funktioniert irgendwie noch nicht, wir sollten das außerhalb der Funktion deklarieren.
 current_step = "start"
 
 print(r"""\
@@ -48,15 +49,12 @@ def start():
 start()
 
 
-
-
-
 def menu():
   current_step = "menu"
-  fc.typingPrint("Menü\n(S)tarten   (E)rklärung   (F)ortsetzen (...)")
+  fc.typingPrint("Menü\n(S)tarten   (Ü)bersicht   (E)rklärung   (F)ortsetzen")
   menu_selection = input().lower()
 
-  if menu_selection == 'e':
+  if menu_selection == 'ü':
       text = '''
             Arbeitszeit: 60 min
             Backen: 20 min
@@ -67,6 +65,15 @@ def menu():
                 #Schwarzwälder Kirschtorte gehört einfach zu den beliebtesten Klassiker-Rezepten.
                 #Wir haben ein ganz einfaches und gelingsicheres Rezept für den Klassiker entwickelt,
                 #mit dem auch du die perfekte Schwarzwälder Kirschtorte zaubern kannst.
+      print(text)
+      menu()
+  
+  elif menu_selection == 'e':
+      text = '''
+            - Die Klammern geben an, welchen Buchstaben du eingeben musst.
+            - Die Eingaben die du machst immer mit "Enter" bestätigen
+            - Falls du etwas falsches eingibst, wird deine Eingabe abgefangen und du kannst es noch einmal versuchen. 
+             '''
       print(text)
       menu()
 
@@ -192,9 +199,25 @@ def shopping():
 
 shopping()
 
+
 def preparation():
   current_step = "preparation"
   fc.typingPrint("Lass uns mit dem Backvorgang beginnen, zuerst bereiten wir die Zutaten vor.")
+  fc.typingPrint("Dafür brauchst du: 6 Eier, 200g Zucker, 200g Mehl, 50g Speisestärke, 50g Kakaopulver, 2 TL Backpulver")
+  fc.typingPrint("(W)eiter?") # Eventuell (Z)urück? Aber eigentlich sieht man ja den Schritt davor in der Konsole.
+  next = input().lower()
+  fc.preparation_check(next)
 
+  fc.typingPrint("Schritt 1:")
+  fc.typingPrint('''Für den Biskuitboden 6 Eier mit Zucker und 6 EL Wasser in eine Schüssel geben und mit dem Rührgerät etwa 5 Minuten auf höchster Stufe schlagen, bis die Masse ihr Volumen etwa verdoppelt hat.''')
+  fc.typingPrint("(W)eiter?")
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 2:")
+  fc.typingPrint("Mehl, Speisestärke, Kakaopulver und Backpulver in einer Schüssel vermischen.")
+  fc.typingPrint("(W)eiter?")
+  next = input().lower()
+  fc.preparation_check(next)
 
 preparation()

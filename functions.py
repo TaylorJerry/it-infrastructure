@@ -2,10 +2,7 @@ import time, sys
 
 ingredients = []
 
-def print_menu():
-  #print("Menü")
-  #print("(E)klärung   (S)tarten   ()")
-  return "Menü\n(S)tarten   (E)rklärung   (...)"
+## Functions for useful helpers and animations
 
 # Text output animation
 def typingPrint(text):
@@ -15,27 +12,11 @@ def typingPrint(text):
     time.sleep(0.01)
   print()
 
-def ingredients_check(ingredient, user_input):
-  if user_input == 'j':
-    pass
-
-  elif user_input == 'n':
-    ingredients.append(ingredient)
-
-  #elif user_input == 'c':
-  #  cb.menu()
-
-  else:
-    typingPrint("Falsche Eingabe, versuch es noch einmal (j) (n):")
-    new_input = input().lower()
-    ingredients_check(ingredient, new_input)
-
-
 # TODO: Counter Function for time
 def timer(task):
     for remaining in range(10, 0, -1):
         sys.stdout.write("\r")
-        sys.stdout.write("{task} dauert noch{count:2d} Minuten...".format(task=task, count=remaining))
+        sys.stdout.write("{task} dauert noch {count:2d} Minuten...".format(task=task, count=remaining))
         sys.stdout.flush()
         time.sleep(1)
 
@@ -57,3 +38,30 @@ def loading_animation(wait_time):
       print(bar[i % len(bar)], end="\r")
       time.sleep(0.3)
       i += 1
+
+## Functions for validating user input
+
+
+def ingredients_check(ingredient, user_input):
+  if user_input == 'j':
+    pass
+
+  elif user_input == 'n':
+    ingredients.append(ingredient)
+
+  #elif user_input == 'c':
+  #  cb.menu()
+
+  else:
+    typingPrint("Falsche Eingabe, versuch es noch einmal (j) (n):")
+    new_input = input().lower()
+    ingredients_check(ingredient, new_input)
+
+def preparation_check(user_input):
+    if user_input == 'w':
+        pass
+
+    else:
+        typingPrint("Falsche Eingabe, versuch es noch einmal (w):")
+        new_input = input().lower()
+        preparation_check(new_input) 
