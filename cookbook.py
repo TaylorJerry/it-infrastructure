@@ -42,15 +42,14 @@ print(r"""\
 
 
 def start():
-  current_step = "start"
+  #current_step = "start"
   fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist dein Name?")
   input_name = input()
   fc.typingPrint(f"Wilkommen {input_name}!")
 start()
 
-
+current_step = "menu"
 def menu():
-  current_step = "menu"
   fc.typingPrint("Menü\n(S)tarten   (Ü)bersicht   (E)rklärung   (F)ortsetzen")
   menu_selection = input().lower()
 
@@ -71,7 +70,7 @@ def menu():
   elif menu_selection == 'e':
       text = '''
             - Die Klammern geben an, welchen Buchstaben du eingeben musst.
-            - Die Eingaben die du machst immer mit "Enter" bestätigen
+            - Die Eingaben die du machst, immer mit "Enter" bestätigen.
             - Falls du etwas falsches eingibst, wird deine Eingabe abgefangen und du kannst es noch einmal versuchen. 
              '''
       print(text)
@@ -156,9 +155,8 @@ def chocolate_shavings():
   chocolate_shavings = input().lower()
   fc.ingredients_check("Schokoraspeln", chocolate_shavings)
 
-
+current_step = "ingredients_list"
 def ingredients_list():
-  current_step = "ingredients_list"
   eggs()
   sugar()
   flour()
@@ -174,9 +172,9 @@ def ingredients_list():
 
 ingredients_list()
 
+current_step = "shopping"
 def shopping():
   #current_step = shopping()
-  current_step = "shopping"
   fc.typingPrint(f"Das waren alle Zutaten, dir fehlen noch: {len(fc.ingredients)} Zutaten")
   for ingredients in fc.ingredients:
     fc.typingPrint(ingredients)
@@ -199,9 +197,10 @@ def shopping():
 
 shopping()
 
+menu()
 
+current_step = "preparation"
 def preparation():
-  current_step = "preparation"
   fc.typingPrint("Lass uns mit dem Backvorgang beginnen, zuerst bereiten wir die Zutaten vor.")
   fc.typingPrint("Dafür brauchst du: 6 Eier, 200g Zucker, 200g Mehl, 50g Speisestärke, 50g Kakaopulver, 2 TL Backpulver")
   fc.typingPrint("(W)eiter?") # Eventuell (Z)urück? Aber eigentlich sieht man ja den Schritt davor in der Konsole.
