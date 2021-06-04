@@ -1,8 +1,8 @@
-#from functions import print_menu
-#import typing_extensions
+import sys
 import functions as fc
 
-# TODO: Das mit dem current_step funktioniert irgendwie noch nicht, wir sollten das außerhalb der Funktion deklarieren.
+# TODO: Eventuell noch reinbringen was man für Equipment braucht? Springform z.B
+# TODO: Im Menü könnte man noch das Rezept zur Übersicht einstellen. Bzw. auch das Equipment
 current_step = "start"
 
 print(r"""\
@@ -50,7 +50,7 @@ start()
 
 current_step = "menu"
 def menu():
-  fc.typingPrint("Menü\n(S)tarten   (Ü)bersicht   (E)rklärung   (F)ortsetzen")
+  fc.typingPrint("Menü\n(S)tarten   (Ü)bersicht   (E)rklärung   (F)ortsetzen  (B)eenden")
   menu_selection = input().lower()
 
   if menu_selection == 'ü':
@@ -79,6 +79,10 @@ def menu():
   elif menu_selection == 's':
     fc.typingPrint("Wir starten mit der Zutatenliste für den Biscuitteig!")
 
+  elif menu_selection == 'b':
+    fc.typingPrint("Schade dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fäng mal klein an :-)")
+    sys.exit()
+
   elif menu_selection == 'f':
     fc.typingPrint("Letzten Stand laden")
     fc.loading_animation(7)
@@ -90,8 +94,10 @@ def menu():
       ingredients_list()
     elif current_step == "shopping":
       shopping()
-    elif current_step == "preparation":
-      preparation
+    elif current_step == "base_preperation":
+      prepare_base()
+    elif current_step == "cherry_preparation":
+      prepare_cherrys
 
   else: 
     fc.typingPrint("Falsche Eingabe, versuch es noch einmal")
@@ -131,7 +137,7 @@ def baking_powder():
   fc.ingredients_check("Backpulver", baking_powder)
 
 def cherries():
-  fc.typingPrint("Hast du 350g Schattenmorellen? (j) (n)")
+  fc.typingPrint("Hast du 350g Schattenmorellen (eine Kirschenart) im Glas? (j) (n)")
   cherries = input().lower()
   fc.ingredients_check("Schattenmorellen", cherries)
 
@@ -190,20 +196,21 @@ def shopping():
             ______o____o__________ 
                                   \_______
                         ''')
-    fc.timer('Einkaufen')
+    fc.timer('Einkaufen', 10)
 
   else:
     fc.typingPrint("Super, dir fehlen keine Zutaten mehr!")
 
 shopping()
 
-menu()
 
-current_step = "preparation"
-def preparation():
-  fc.typingPrint("Lass uns mit dem Backvorgang beginnen, zuerst bereiten wir die Zutaten vor.")
+# TODO: Den folgenden Code könnte man noch etwas interaktiver gestalten
+# Eventuell (Z)urück? Aber eigentlich sieht man ja den Schritt davor in der Konsole.
+current_step = "base_preperation"
+def prepare_base():
+  fc.typingPrint("Lass uns mit dem Backvorgang beginnen, zuerst bereiten wir die den Biskuitboden vor!")
   fc.typingPrint("Dafür brauchst du: 6 Eier, 200g Zucker, 200g Mehl, 50g Speisestärke, 50g Kakaopulver, 2 TL Backpulver")
-  fc.typingPrint("(W)eiter?") # Eventuell (Z)urück? Aber eigentlich sieht man ja den Schritt davor in der Konsole.
+  fc.typingPrint("(W)eiter?") 
   next = input().lower()
   fc.preparation_check(next)
 
@@ -212,11 +219,93 @@ def preparation():
   fc.typingPrint("(W)eiter?")
   next = input().lower()
   fc.preparation_check(next)
+  print('''
+                 .-'"""""""\\
+                |o\     __  )
+                | ;`----||-'
+                /  \   _||__
+               |::: ||`"""""`|
+               |:::O|=\     /=,
+               `""""`'=`"""`=='
+  ''')
+  fc.timer('Rühren', 5)
 
   fc.typingPrint("Schritt 2:")
   fc.typingPrint("Mehl, Speisestärke, Kakaopulver und Backpulver in einer Schüssel vermischen.")
+  fc.typingPrint("Ein Tipp von Profis: Wenn du die trockenen Zutaten siebst, wird der Teig viel luftiger!")
   fc.typingPrint("(W)eiter?")
   next = input().lower()
   fc.preparation_check(next)
 
-preparation()
+  fc.typingPrint("Schritt 3:")
+  fc.typingPrint("Ofen auf 180 Grad (Umluft: 160 Grad) vorheizen.")
+  fc.typingPrint("(W)eiter?")
+  next = input().lower()
+  fc.preparation_check(next)
+
+prepare_base()
+
+current_step = "cherry_preparation"
+def prepare_cherrys():
+  fc.typingPrint("Jetzt bereiten wir die Schattenmorellen vor und backen den Boden!")
+  fc.typingPrint("Dafür brauchst du: etwas Butter für die Form, 1 Glas Schattenmorellen (Abtropfgewicht 350g), 2 EL Speisestärke ")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 1:") 
+  fc.typingPrint("Den Boden einer Springform (Ø 26 cm) einfetten und leicht bemehlen.")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 2:") 
+  fc.typingPrint("Die Biskuitmasse in die Springform hineingeben und glatt streichen.")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 3:") 
+  fc.typingPrint("Im vorgeheizten Ofen etwa 20 Minuten backen und danach vollständig auskühlen lassen.")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 4:") 
+  fc.typingPrint("Während der Boden backt bereiten wir die Füllung vor!")
+  fc.typingPrint("Für die Füllung Schattenmorellen über einem Sieb abgießen, dabei den Saft auffangen. Stärke mit 2EL vom Saft anrühren.")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+
+  fc.typingPrint("Schritt 4:") 
+  fc.typingPrint("Den restlichen Kirschsaft aufkochen und die Speisestärke-Kirschsaft-Masse mit einrühren.") 
+  fc.typingPrint("Dies kurz unter Rühren aufkochen lassen, dann direkt vom Herd nehmen.")
+  fc.typingPrint("(W)eiter?") 
+  next = input().lower()
+  fc.preparation_check(next)
+  print('''
+                 _.-------------.
+             .-''            .;'|
+            ;==============;+'  |
+            |              |    |
+            | (} (} {) (}  |    |
+            |              |    | 
+            | .==========. |    |
+            | | _ .'"+_/)| |    |
+            | |( \(  (`( | |    |       
+            | | \- `.  -)| |    |
+            | | ( (  _  )| |    |
+            | |  `--' `' | |    ;
+            | `----------' |  .'
+            |              |.'
+            `--------------'    
+  ''')
+  fc.timer('Backen', 20)
+  # TODO: Kuchen in den Ofen einfügen
+
+prepare_cherrys()
+
+
+
+

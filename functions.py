@@ -13,8 +13,8 @@ def typingPrint(text):
   print()
 
 # TODO: Counter Function for time
-def timer(task):
-    for remaining in range(10, 0, -1):
+def timer(task, duration):
+    for remaining in range(duration, 0, -1):
         sys.stdout.write("\r")
         sys.stdout.write("{task} dauert noch {count:2d} Minuten...".format(task=task, count=remaining))
         sys.stdout.flush()
