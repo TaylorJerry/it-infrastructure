@@ -104,7 +104,9 @@ def menu():
       elif skip_input == "e":
         final_assembly()
       else:
-        fc.typingPrint("Keine gültige Eingabe. Wähle etwas anderes aus.")
+        fc.typingPrint("Keine gültige Eingabe. Zurük zum Menü...")
+        menu()
+
 
   elif menu_selection == 'e':
       text = '''
