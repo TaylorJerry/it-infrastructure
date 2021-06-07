@@ -1,4 +1,5 @@
 import time, sys
+import math
 
 ingredients = []
 
@@ -12,15 +13,38 @@ def typingPrint(text):
     time.sleep(0.01)
   print()
 
-# TODO: Counter Function for time
-def timer(task, duration):
-    for remaining in range(duration, 0, -1):
-        sys.stdout.write("\r")
-        sys.stdout.write("{task} dauert noch {count:2d} Minuten...".format(task=task, count=remaining))
-        sys.stdout.flush()
-        time.sleep(1)
+def typingPrintBold(text):
+  for character in text:
+    sys.stdout.write("\033[1m" + character + "\033[0m")
+    sys.stdout.flush()
+    time.sleep(0.01)
+  print()
 
-    sys.stdout.write("\nFertig!\n")
+
+
+def timer(task, duration):
+    bar = [
+    " [=     ]",
+    " [==    ]",
+    " [ ==   ]",
+    " [  ==  ]",
+    " [   == ]",
+    " [    ==]",
+    " [     =]",
+    ]
+    x = 0 
+
+    for remaining in range(duration*5, 0, -1):
+      count = math.ceil(remaining/5)
+      sys.stdout.write("\r")
+      print(f"{bar[x % len(bar)]} {task} dauert noch {count:2d} Minuten.", end="\r")
+      sys.stdout.flush()
+      x += 1
+      time.sleep(0.2)
+    print("\nFertig!\n")
+
+
+
 
 def loading_animation(wait_time):
   bar = [
@@ -57,11 +81,6 @@ def ingredients_check(ingredient, user_input):
     new_input = input().lower()
     ingredients_check(ingredient, new_input)
 
-def preparation_check(user_input):
-    if user_input == 'w':
-        pass
 
-    else:
-        typingPrint("Falsche Eingabe, versuch es noch einmal (w):")
-        new_input = input().lower()
-        preparation_check(new_input) 
+
+        
