@@ -7,8 +7,9 @@ import functions as fc
 
 
 current_step = []
+input_name = ""
 
-print(r"""\
+print(r"""
 
    _____      _                                    _   _ _     _           
   / ____|    | |                                  (_) (_) |   | |          
@@ -45,14 +46,7 @@ print(r"""\
 
 
 
-#Geetings and Asking for Name
-input_name = ""
-def start():
-  #current_step.append("start")
-  fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist dein Name?")
-  input_name = input()
-  fc.typingPrint(f"Wilkommen {input_name}!")
-  menu()
+
 
 
 
@@ -66,7 +60,6 @@ def start():
 #User manual for the interaction with the program
 #Skip to the paused section
 #End the program
-
 def menu():
   #current_step.append("menu")
   fc.typingPrintBold("\nMenü:")
@@ -90,8 +83,9 @@ def menu():
             - (Z)utaten
             - Schritt 1 (A): Biskuitboden vorbereiten
             - Schritt 2 (B): Biskuitboden backen
-            - Schritt 3 (C): Füllung der Torte zubereiten
-            - Schritt 4 (D): ...
+            - Schritt 3 (C): Füllung der Torte vorbereiten
+            - Schritt 4 (D): Erste Schicht der Torte auftragen
+            - Schritt 5 (E): Torte vollenden und dekorieren
              '''
       print(text)
       skip_input = input().lower()
@@ -102,7 +96,13 @@ def menu():
       elif skip_input == "a":
         prepare_base()
       elif skip_input == "b":
-        prepare_base()
+        baking()
+      elif skip_input == "c":
+        prepare_cherries()
+      elif skip_input == "d":
+        use_cherries()
+      elif skip_input == "e":
+        final_assembly()
       else:
         fc.typingPrint("Keine gültige Eingabe. Wähle etwas anderes aus.")
 
@@ -117,16 +117,24 @@ def menu():
       menu()
 
   elif menu_selection == 's':
-    fc.typingPrint("Wir starten mit der Zutatenliste für den Biscuitteig!")
     ingredients_list()
 
   elif menu_selection == 'b':
-    fc.typingPrint("Schade dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fäng mal klein an :-)")
+    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fäng mal klein an :-)")
     sys.exit()
 
   elif menu_selection == 'f':
     load_last_savepoint()
 
+  elif menu_selection == 'log':
+    fc.typingPrintBold(f"\nLogdaten für {input_name}:")
+    for step in range(len(current_step)):
+      fc.typingPrint(f"{step}: {current_step[step]}")
+    menu()
+
+  elif menu_selection == 'asdf':
+    fc.troll()
+    menu()
 
   else: 
     fc.typingPrint("Falsche Eingabe, versuch es noch einmal")
@@ -137,7 +145,7 @@ def menu():
 
 def load_last_savepoint():
   if len(current_step) > 0:
-    fc.typingPrint("Letzten Stand laden")
+    fc.typingPrint(f"Letzten Stand für {input_name} laden")
     fc.timer( "Laden des alten Standes", 2)
     if current_step[len(current_step)-1] == "ingredients_list":
       ingredients_list()
@@ -145,8 +153,16 @@ def load_last_savepoint():
       shopping()
     elif current_step[len(current_step)-1] == "prepare_base":
       prepare_base()
+    elif current_step[len(current_step)-1] == "baking":
+      baking()
     elif current_step[len(current_step)-1] == "prepare_cherries":
-      prepare_cherrys()
+      prepare_cherries()
+    elif current_step[len(current_step)-1] == "use_cherries":
+      use_cherries()
+    elif current_step[len(current_step)-1] == "final_assembly":
+      final_assembly()
+    elif current_step[len(current_step)-1] == "end":
+      end()
   elif len(current_step) == 0:
       fc.typingPrint("Kein Speicherstand gefunden. Zurück zum Menü...")
       menu()
@@ -221,21 +237,27 @@ def chocolate_shavings():
   fc.ingredients_check("Schokoraspeln", chocolate_shavings)
 
 
+
+
+
+
 #Ask for all the ingredients one after another
 def ingredients_list():
   current_step.append("ingredients_list")
+  fc.typingPrintBold("\nWir starten mit der Zutatenliste für den Biscuitteig:")
   eggs()
   sugar()
   flour()
   food_starch()
   cocoa()
   baking_powder()
-  fc.typingPrint("Jetzt machen wir weiter mit der Füllung!")
+  fc.typingPrintBold("\nJetzt machen wir weiter mit den Zutaten für die Füllung:")
   cherries()
   cream()
   cream_stiff()
   cherry_water()
   chocolate_shavings()
+  shopping()
 
 
 
@@ -248,10 +270,10 @@ def ingredients_list():
 def shopping():
   current_step.append("shopping")
   if len(fc.ingredients) > 0: 
-    fc.typingPrint(f"Das waren alle Zutaten, dir fehlen noch: {len(fc.ingredients)} Zutaten")
+    fc.typingPrintBold(f"\nDas waren alle Zutaten, dir fehlen noch: {len(fc.ingredients)} Zutaten")
     for ingredients in fc.ingredients:
       fc.typingPrint(ingredients)
-    fc.typingPrint("Lass uns die fehlenden Zutaten einkaufen!")
+    fc.typingPrint("\nLass uns die fehlenden Zutaten einkaufen!")
     print('''
               _
          ~     \________
@@ -295,13 +317,13 @@ def preparation_check(user_input):
 
 def prepare_base():
   current_step.append("prepare_base")
-  fc.typingPrint("Lass uns mit dem Backvorgang beginnen, zuerst bereiten wir die den Biskuitboden vor!")
+  fc.typingPrintBold(f"{input_name} bist zu bereit zum Starten? \nLass uns mit dem Backvorgang beginnen, zuerst bereiten wir die den Biskuitboden vor!")
   fc.typingPrint("Dafür brauchst du: 6 Eier, 200g Zucker, 200g Mehl, 50g Speisestärke, 50g Kakaopulver, 2 TL Backpulver")
-  fc.typingPrint("(W)eiter (M)enü") 
-  next = input().lower()
-  preparation_check(next)
+  #fc.typingPrint("(W)eiter (M)enü") 
+  #next = input().lower()
+  #preparation_check(next)
 
-  fc.typingPrintBold("Schritt 1:")
+  fc.typingPrintBold("\nSchritt 1:")
   fc.typingPrint('''Für den Biskuitboden 6 Eier mit Zucker und 6 EL Wasser in eine Schüssel geben \nund mit dem Rührgerät etwa 5 Minuten auf höchster Stufe schlagen, bis die Masse ihr Volumen etwa verdoppelt hat.''')
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
@@ -317,64 +339,50 @@ def prepare_base():
   ''')
   fc.timer('Rühren', 5)
 
-  fc.typingPrintBold("Schritt 2:")
+  fc.typingPrintBold("\nSchritt 2:")
   fc.typingPrint("Mehl, Speisestärke, Kakaopulver und Backpulver in einer Schüssel vermischen.")
   fc.typingPrint("Ein Tipp von Profis: Wenn du die trockenen Zutaten siebst, wird der Teig viel luftiger!")
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
 
-  fc.typingPrintBold("Schritt 3:")
+  fc.typingPrintBold("\nSchritt 3:")
   fc.typingPrint("Ofen auf 180 Grad (Umluft: 160 Grad) vorheizen.")
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
 
-
-  prepare_cherrys()
-
+  baking()
 
 
 
-def prepare_cherrys():
-  current_step.append("prepare_cherries")
-  fc.typingPrintBold("Jetzt bereiten wir die Schattenmorellen vor und backen den Boden!")
-  fc.typingPrint("Dafür brauchst du: etwas Butter für die Form, 1 Glas Schattenmorellen (Abtropfgewicht 350g), 2 EL Speisestärke ")
-  fc.typingPrint("(W)eiter (M)enü") 
-  next = input().lower()
-  preparation_check(next)
 
-  fc.typingPrintBold("Schritt 1:") 
+def baking():
+  current_step.append("baking")
+  fc.typingPrintBold("\nJetzt bereiten wir die Schattenmorellen vor und backen den Boden!")
+  fc.typingPrint("Dafür brauchst du: etwas Butter für die Form")
+  #fc.typingPrint("(W)eiter (M)enü") 
+  #next = input().lower()
+  #preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 1:") 
   fc.typingPrint("Den Boden einer Springform (Ø 26 cm) einfetten und leicht bemehlen.")
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
 
-  fc.typingPrintBold("Schritt 2:") 
+  fc.typingPrintBold("\nSchritt 2:") 
   fc.typingPrint("Die Biskuitmasse in die Springform hineingeben und glatt streichen.")
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
 
-  fc.typingPrintBold("Schritt 3:") 
+  fc.typingPrintBold("\nSchritt 3:") 
   fc.typingPrint("Im vorgeheizten Ofen etwa 20 Minuten backen und danach vollständig auskühlen lassen.")
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
-
-  fc.typingPrintBold("Schritt 4:") 
-  fc.typingPrint("Während der Boden backt bereiten wir die Füllung vor!")
-  fc.typingPrint("Für die Füllung Schattenmorellen über einem Sieb abgießen, dabei den Saft auffangen. Stärke mit 2EL vom Saft anrühren.")
-  fc.typingPrint("(W)eiter (M)enü") 
-  next = input().lower()
-  preparation_check(next)
-
-  fc.typingPrintBold("Schritt 4:") 
-  fc.typingPrint("Den restlichen Kirschsaft aufkochen und die Speisestärke-Kirschsaft-Masse mit einrühren.") 
-  fc.typingPrint("Dies kurz unter Rühren aufkochen lassen, dann direkt vom Herd nehmen.")
-  fc.typingPrint("(W)eiter (M)enü") 
-  next = input().lower()
-  preparation_check(next)
+  # TODO: Kuchen in den Ofen einfügen
   print('''
                  _.-------------.
              .-''            .;'|
@@ -389,7 +397,128 @@ def prepare_cherrys():
                 
   ''')
   fc.timer('Backen', 20)
-  # TODO: Kuchen in den Ofen einfügen
+  prepare_cherries()
+
+
+
+
+def prepare_cherries():
+  current_step.append("prepare_cherries")
+  fc.typingPrintBold(f"\nSo... {input_name}, den ersten Teil des Rezepts hast du jetzt schonmal hinter dir. Jetzt kommt der leckere Teil der Torte dran.")
+  fc.typingPrint("Dafür brauchst du: 1 Glas Schattenmorellen (Abtropfgewicht 350g), 2 EL Speisestärke")
+  print(r"""
+     __.--~~.,-.__
+   `~-._.-(`-.__`-.
+           \    `~~`
+      .--./ \
+     /#   \  \.--.
+     \    /  /#   \
+      '--'   \    /
+              '--'
+  """)
+  fc.typingPrintBold("\nSchritt 1:")
+  #fc.typingPrint("Während der Boden backt bereiten wir die Füllung vor!")
+  fc.typingPrint("Für die Füllung Schattenmorellen über einem Sieb abgießen, dabei den Saft auffangen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 2:") 
+  fc.typingPrint("Stärke mit 2EL vom Saft anrühren.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 3:") 
+  fc.typingPrint("Den restlichen Kirschsaft aufkochen und die Speisestärke-Kirschsaft-Masse mit einrühren.") 
+  fc.typingPrint("Dies kurz unter Rühren aufkochen lassen, dann direkt vom Herd nehmen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  use_cherries()
+
+
+def use_cherries():
+  current_step.append("use_cherries")
+  fc.typingPrintBold(f"\nJetzt haben wir die Füllung vorbereitet und können damit die erste Schicht der Torte erstellen.")
+  fc.typingPrint("Dafür brauchst du: 1 Liter Sahne, 5 Pck. Sahnesteif, 1 EL Zucker, 3 EL Kirschwasser")
+  fc.typingPrintBold("\nSchritt 1:")
+  fc.typingPrint("16 Schattenmorellen legen wir beiseite. Die benötigen wir später für die Deko der Torte.")
+  fc.typingPrint("Die restlichen Schattenmorellen unter die Speisestärke-Kirschmasse heben.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 2:")
+  fc.typingPrint("Tortenboden zwei mal durchschneiden, sodass drei Böden entstehen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 3:")
+  fc.typingPrint("Auf den ersten Tortenboden 3EL Kirschwasser träufeln.")
+  fc.typingPrint("Kirschmasse vollständig darauf verteilen und glatt streichen und abkühlen lassen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 4:")
+  fc.typingPrint("Sahne mit Sahnesteif und Zucker steif schlagen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 5:")
+  fc.typingPrint("Mit einem Löffel oder Palettenmesser etwa 3EL Sahne dünn auf die Kirschmasse streichen. ")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  final_assembly()
+
+
+def final_assembly():
+  current_step.append("final_assembly")
+  fc.typingPrintBold(f"\nJetzt haben wir alle Vorbereitungen getroffen um die Torte zu vollenden.")
+  fc.typingPrint("Dafür brauchst du: 6 EL Kirschwasser, 100 g Schokoraspel")
+  fc.typingPrintBold("\nSchritt 1:")
+  fc.typingPrint("Etwa 4EL der Sahne in einen Spritzbeutel mit Sterntülle geben und beiseite legen.")
+  fc.typingPrint("Zweiten Boden auf den ersten Boden legen und leicht andrücken.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 2:")
+  fc.typingPrint("Wieder 3EL Kirschwasser auf den Boden träufeln und etwa die Hälfte der restlichen Sahne auf den Boden streichen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 3:")
+  fc.typingPrint("Letzten Biskuitboden auflegen, mit dem restlichen Kirschwasser tränken, dann mit der restlichen Sahne die Torte verkleiden.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 4:")
+  fc.typingPrint("Mit dem Spritzbeutel 16 Sahnetuffs auf die Torte spritzen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  fc.typingPrintBold("\nSchritt 5:")
+  fc.typingPrint("Jetzt die Kirschen obenauf setzen und mit der Raspelschokolade die Oberfläche und den Rand bestreuen. Bis zum Servieren kalt stellen.")
+  fc.typingPrint("(W)eiter (M)enü") 
+  next = input().lower()
+  preparation_check(next)
+
+  end()
+
+
+def end():
+  current_step.append("end")
+  menu()
 
 
 
@@ -399,5 +528,10 @@ def prepare_cherrys():
 
 
 #Main Worfklow
-start()
+#Geetings and Asking for Name
+#current_step.append("start")
+fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist dein Name?")
+input_name = input()
+fc.typingPrint(f"Wilkommen {input_name}!")
+menu()
 
