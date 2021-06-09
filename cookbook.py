@@ -176,31 +176,31 @@ def load_last_savepoint():
 def eggs():
   fc.typingPrint("Hast du 6 Eier? (j) (n)")
   eggs = input().lower()
-  fc.ingredients_check("Eier", eggs)
+  fc.ingredients_check("6 Eier", eggs)
 
 #Sugar
 def sugar():
   fc.typingPrint("Hast du 250g Zucker? (j) (n)")
   sugar = input().lower()
-  fc.ingredients_check("Zucker", sugar)
+  fc.ingredients_check("250g Zucker", sugar)
 
 #MFlour
 def flour():
   fc.typingPrint("Hast du 200g Mehl? (j) (n)")
   flour = input().lower()
-  fc.ingredients_check("Mehl", flour)
+  fc.ingredients_check("200g Mehl", flour)
 
 #Food starch
 def food_starch():
   fc.typingPrint("Hast du 50g Speisestärke? (j) (n)")
   food_starch = input().lower()
-  fc.ingredients_check("Speisestärke", food_starch)
+  fc.ingredients_check("50g Speisestärke", food_starch)
 
 #Cocoa
 def cocoa():
   fc.typingPrint("Hast du 50g Kakaopulver? (j) (n)")
   cocoa = input().lower()
-  fc.ingredients_check("Kakaopulver", cocoa)
+  fc.ingredients_check("50g Kakaopulver", cocoa)
 
 #baking Powder
 def baking_powder():
@@ -212,31 +212,31 @@ def baking_powder():
 def cherries():
   fc.typingPrint("Hast du 350g Schattenmorellen (eine Kirschenart) im Glas? (j) (n)")
   cherries = input().lower()
-  fc.ingredients_check("Schattenmorellen", cherries)
+  fc.ingredients_check("350g Schattenmorellen", cherries)
 
 #Cream
 def cream():
   fc.typingPrint("Hast du 1l Sahne? (j) (n)")
   cream = input().lower()
-  fc.ingredients_check("Sahne", cream)
+  fc.ingredients_check("1l Sahne", cream)
 
 #Cream Stiff
 def cream_stiff():
   fc.typingPrint("Hast du 5 Packungen Sahnesteif? (j) (n)")
   cream_stiff = input().lower()
-  fc.ingredients_check("Sahnesteif", cream_stiff)
+  fc.ingredients_check("5 Packungen Sahnesteif", cream_stiff)
 
 #Cherry Water
 def cherry_water():
   fc.typingPrint("Hast du 125ml (9 Esslöffel) Kirschwasser? (j) (n)")
   cherry_water = input().lower()
-  fc.ingredients_check("Kirschwasser", cherry_water)
+  fc.ingredients_check("125ml Kirschwasser", cherry_water)
 
 #Chocolate Shavings
 def chocolate_shavings():
   fc.typingPrint("Hast du 100g Schokoraspeln? (j) (n)")
   chocolate_shavings = input().lower()
-  fc.ingredients_check("Schokoraspeln", chocolate_shavings)
+  fc.ingredients_check("100g Schokoraspeln", chocolate_shavings)
 
 
 
