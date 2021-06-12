@@ -34,7 +34,7 @@ def cancel():
 def menu():
   #current_step.append("menu")
   fc.typingPrintBold("\nMenü:")
-  fc.typingPrint("(S)tarten  (Ü)bersicht   (I)nformationen   (E)rklärung   (F)ortsetzen  (B)eenden")
+  fc.typingPrint("(S)tarten  (Ü)bersicht   (I)nformationen   (E)rklärung   (F)ortsetzen  (C)redits  (B)eenden")
   menu_selection = input().lower()
 
   if menu_selection == 'i': #If i is pressed -> show general information about the recipe
@@ -108,7 +108,7 @@ def menu():
     fc.troll()
     menu()
 
-  elif menu_selection == 'credits': #If credits is pressed -> open function credits in file functions.py and reload menu
+  elif menu_selection == 'c': #If credits is pressed -> open function credits in file functions.py and reload menu
     fc.credits()
     menu()
 
@@ -494,12 +494,12 @@ def final_assembly():
 
 
 #End of recipe
-#End program with a funnx picture
+#End program with a funny picture
 def end():
   current_step.append("end")
   fc.typingPrintBold("\nDie Torte ist fertig!")
   fc.typingPrint(f"Toll {input_name}! Du hast dieses schwierige Rezept gemeistert und eine sagenhafte Torte gebacken!")
-  fc.typingPrint("Jetzt nur noch Kaffe kochen und die Oma an den Tisch holen und es kann losgehen!")
+  fc.typingPrint("Jetzt nur noch Kaffe kochen, die Oma an den Tisch holen und es kann losgehen!")
   print("""
                    .---.
                   (_---_)
