@@ -122,7 +122,7 @@ def menu():
     ingredients_list()
 
   elif menu_selection == 'b':
-    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fäng mal klein an :-)")
+    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fängt mal klein an :-)")
     sys.exit()
 
   elif menu_selection == 'f':
@@ -514,6 +514,47 @@ def final_assembly():
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
+
+  fc.typingPrintBold("\nDie Torte ist fertig!")
+  fc.typingPrint(f"Toll {input_name}! Du hast dieses schwierige Rezept gemeistert und eine sagenhafte Torte gebacken!")
+  fc.typingPrint("Jetzt nur noch Kaffe kochen und die Oma an den Tisch holen und es kann losgehen!")
+  print("""
+                   .---.
+                  (_---_)
+                 (_/$ $\_)
+                  (  v  )
+                   `\ /'
+                .-'': ;``-.
+               /   \,Y./   \\
+              /     (:)___  \\
+             :   .-'XXX`-.`\_;
+              `.__.-XXX-.__.'
+               /  / XXX \  \   
+              /      XXX    \     
+             /        XXX    \    
+            /                 \  
+           /                   \ 
+           `--...___   ___...--' 
+
+
+    (  )   (   )  )            (  )   (   )  )       
+     ) (   )  (  (              ) (   )  (  (
+     ( )  (    ) )              ( )  (    ) )
+     _____________              _____________
+    <_____________> ___        <_____________> ___
+    |             |/ _ \\      |             |/ _ \\
+    |               | | |      |               | | |
+    |               |_| |      |               |_| |
+ ___|             |\___/     __|             |\___/
+/    \___________/    \\    /    \___________/    \\
+\_____________________/     \_____________________/
+
+  """)
+
+  fc.typingPrint(f"Wir bedanken uns für deine Aufmerksamkeit {input_name}!")
+  fc.typingPrint("Vielleicht hast du ja bald Lust wieder mit uns zu backen! :-)")
+  fc.typingPrint("Tschüss!")
+
 
   end()
 

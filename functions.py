@@ -37,7 +37,10 @@ def timer(task, duration):
     for remaining in range(duration*5, 0, -1):
       count = math.ceil(remaining/5)
       sys.stdout.write("\r")
-      print(f"{bar[x % len(bar)]} {task} dauert noch {count:2d} Minuten.", end="\r")
+      if count == 1:
+          print(f"{bar[x % len(bar)]} {task} dauert noch eine Minute.", end="\r")
+      else:
+        print(f"{bar[x % len(bar)]} {task} dauert noch {count:2d} Minuten.", end="\r")
       sys.stdout.flush()
       x += 1
       time.sleep(0.2)
