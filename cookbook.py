@@ -1,53 +1,24 @@
 import sys
 import functions as fc
 
-# TODO: Eventuell noch reinbringen was man für Equipment braucht? Springform z.B
-# TODO: Im Menü könnte man noch das Rezept zur Übersicht einstellen. Bzw. auch das Equipment
-
-
 
 current_step = []
 input_name = ""
 
-print(r"""
 
-   _____      _                                    _   _ _     _           
-  / ____|    | |                                  (_) (_) |   | |          
- | (___   ___| |____      ____ _ _ __ ______      ____ _| | __| | ___ _ __ 
-  \___ \ / __| '_ \ \ /\ / / _` | '__|_  /\ \ /\ / / _` | |/ _` |/ _ \ '__|
-  ____) | (__| | | \ V  V / (_| | |   / /  \ V  V / (_| | | (_| |  __/ |   
- |_____/ \___|_| |_|\_/\_/ \__,_|_|  /___| _\_/\_/ \__,_|_|\__,_|\___|_|   
-            | |/ (_)             | |   | |           | |                              
-            | ' / _ _ __ ___  ___| |__ | |_ ___  _ __| |_ ___                         
-            |  < | | '__/ __|/ __| '_ \| __/ _ \| '__| __/ _ \                        
-            | . \| | |  \__ \ (__| | | | || (_) | |  | ||  __/                        
-            |_|\_\_|_|  |___/\___|_| |_|\__\___/|_|   \__\___| 
-               .,a@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a,.                       
-            ,a@@@@@@@@@@@@@@@@@@@@@.@@@@@@@@@@@@@@@@@@@@@@@@a, 
-            a@@@@@@@@@@@@@@@@@@@@@' . `@@@@@@@@@@@@@@@@@@@@@@@@a 
-            ;`@@@@@@@@@@@@@@@@@@'   .   `@@@@@@@@@@@@@@@@@@@@@'; 
-            ;@@@`@@@@@@@@@@@@@'     .     `@@@@@@@@@@@@@@@@'@@@; 
-            ;@@@;,.aaaaaaaaaa       .       aaaaa,,aaaaaaa,;@@@; 
-            ;;@;;;;@@@@@@@@;@      @.@      ;@@@;;;@@@@@@;;;;@@; 
-            ;;;;;;;@@@@;@@;;@    @@ . @@    ;;@;;;;@@;@@@;;;;;;; 
-            ;;;;;;;;@@;;;;;;;  @@   .   @@  ;;;;;;;;;;;@@;;;;@;; 
-            ;;;;;;;;;;;;;;;;;@@     .     @@;;;;;;;;;;;;;;;;@@a; 
-        ,%%%;;;;;;;;@;;;;;;;;       .       ;;;;;;;;;;;;;;;;@@;;%%%, 
-     .%%%%%%;;;;;;;a@;;;;;;;;     ,%%%,     ;;;;;;;;;;;;;;;;;;;;%%%%%%, 
-    .%%%%%%%;;;;;;;@@;;;;;;;;   ,%%%%%%%,   ;;;;;;;;;;;;;;;;;;;;%%%%%%%, 
-    %%%%%%%%`;;;;;;;;;;;;;;;;  %%%%%%%%%%%  ;;;;;;;;;;;;;;;;;;;'%%%%%%%% 
-    %%%%%%%%%%%%`;;;;;;;;;;;;,%%%%%%%%%%%%%,;;;;;;;;;;;;;;;'%%%%%%%%%%%% 
-    `%%%%%%%%%%%%%%%%%,,,,,,,%%%%%%%%%%%%%%%,,,,,,,%%%%%%%%%%%%%%%%%%%%' 
-      `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%' 
-          `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'                                                                           
-                                                                          
-""")
-
-
-
-
-
-
+#Function that is called when you decide to cancel the recipe
+#Canceling is only possible via the menu section
+def cancel():
+  fc.typingPrint("Möchtest du wirklich beenden? (j) (n)")
+  cancel_input = input().lower()
+  if cancel_input == "j":
+    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fängt mal klein an :-)")
+    sys.exit()
+  elif cancel_input == "n":
+    menu()
+  else:
+    fc.typingPrint("Falsche Eingabe, versuch es noch einmal")
+    cancel()
 
 
 
@@ -66,7 +37,7 @@ def menu():
   fc.typingPrint("(S)tarten  (Ü)bersicht   (I)nformationen   (E)rklärung   (F)ortsetzen  (B)eenden")
   menu_selection = input().lower()
 
-  if menu_selection == 'i':
+  if menu_selection == 'i': #If i is pressed -> show general information about the recipe
       text = '''
             Arbeitszeit: 60 min
             Backen: 20 min
@@ -77,7 +48,7 @@ def menu():
       print(text)
       menu()
   
-  elif menu_selection == 'ü':
+  elif menu_selection == 'ü': #If ü is pressed -> get an overview about all steps of the recipe and skip to a section
       text = '''
             Zu einem Schritt springen oder zurück zum (M)enü:
             - (Z)utaten
@@ -108,7 +79,7 @@ def menu():
         menu()
 
 
-  elif menu_selection == 'e':
+  elif menu_selection == 'e': #If e is pressed -> show the user manuel of the program
       text = '''
             - Die Buchstaben in den Klammern geben an, welchen Buchstaben du eingeben musst 
               (Groß- und Kleinschreibung ist irrelevant).
@@ -118,33 +89,36 @@ def menu():
       print(text)
       menu()
 
-  elif menu_selection == 's':
+  elif menu_selection == 's': #If s is pressed -> load function ingredients_list to start the program/recipe
     ingredients_list()
 
-  elif menu_selection == 'b':
-    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fängt mal klein an :-)")
-    sys.exit()
+  elif menu_selection == 'b': #If b is pressed -> load function cancel to cancel the program
+    cancel()
 
-  elif menu_selection == 'f':
+  elif menu_selection == 'f': #If f is pressed -> open function load_last_savepoint to reload last step
     load_last_savepoint()
 
-  elif menu_selection == 'log':
+  elif menu_selection == 'log': #If log is pressed -> show all the steps for each user in chronological order and reload menu
     fc.typingPrintBold(f"\nLogdaten für {input_name}:")
     for step in range(len(current_step)):
       fc.typingPrint(f"{step}: {current_step[step]}")
     menu()
 
-  elif menu_selection == 'asdf':
+  elif menu_selection == 'asdf': #If asdf is pressed -> open function troll in functions and reload menu
     fc.troll()
     menu()
 
-  else: 
+  elif menu_selection == 'credits': #If credits is pressed -> open function credits in file functions.py and reload menu
+    fc.credits()
+    menu()
+
+  else: #wrong input -> Notify user and reload menu
     fc.typingPrint("Falsche Eingabe, versuch es noch einmal")
     menu()
 
-#menu()
 
 
+#function that loads the last step the user took
 def load_last_savepoint():
   if len(current_step) > 0:
     fc.typingPrint(f"Letzten Stand für {input_name} laden")
@@ -302,8 +276,6 @@ def shopping():
 
 
 
-
-# TODO: Den folgenden Code könnte man noch etwas interaktiver gestalten
 # Eventuell (Z)urück? Aber eigentlich sieht man ja den Schritt davor in der Konsole.
 def preparation_check(user_input):
     if user_input == 'w':
@@ -514,7 +486,17 @@ def final_assembly():
   fc.typingPrint("(W)eiter (M)enü") 
   next = input().lower()
   preparation_check(next)
+  end()#Recipe finished -> call the end function
 
+
+
+
+
+
+#End of recipe
+#End program with a funnx picture
+def end():
+  current_step.append("end")
   fc.typingPrintBold("\nDie Torte ist fertig!")
   fc.typingPrint(f"Toll {input_name}! Du hast dieses schwierige Rezept gemeistert und eine sagenhafte Torte gebacken!")
   fc.typingPrint("Jetzt nur noch Kaffe kochen und die Oma an den Tisch holen und es kann losgehen!")
@@ -554,13 +536,6 @@ def final_assembly():
   fc.typingPrint(f"Wir bedanken uns für deine Aufmerksamkeit {input_name}!")
   fc.typingPrint("Vielleicht hast du ja bald Lust wieder mit uns zu backen! :-)")
   fc.typingPrint("Tschüss!")
-
-
-  end()
-
-
-def end():
-  current_step.append("end")
   menu()
 
 
@@ -573,6 +548,40 @@ def end():
 #Main Worfklow
 #Geetings and Asking for Name
 #current_step.append("start")
+#Print the ASCII Art as a kind of "welcome screen"
+print(r"""
+
+   _____      _                                    _   _ _     _           
+  / ____|    | |                                  (_) (_) |   | |          
+ | (___   ___| |____      ____ _ _ __ ______      ____ _| | __| | ___ _ __ 
+  \___ \ / __| '_ \ \ /\ / / _` | '__|_  /\ \ /\ / / _` | |/ _` |/ _ \ '__|
+  ____) | (__| | | \ V  V / (_| | |   / /  \ V  V / (_| | | (_| |  __/ |   
+ |_____/ \___|_| |_|\_/\_/ \__,_|_|  /___| _\_/\_/ \__,_|_|\__,_|\___|_|   
+            | |/ (_)             | |   | |           | |                              
+            | ' / _ _ __ ___  ___| |__ | |_ ___  _ __| |_ ___                         
+            |  < | | '__/ __|/ __| '_ \| __/ _ \| '__| __/ _ \                        
+            | . \| | |  \__ \ (__| | | | || (_) | |  | ||  __/                        
+            |_|\_\_|_|  |___/\___|_| |_|\__\___/|_|   \__\___| 
+               .,a@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a,.                       
+            ,a@@@@@@@@@@@@@@@@@@@@@.@@@@@@@@@@@@@@@@@@@@@@@@a, 
+            a@@@@@@@@@@@@@@@@@@@@@' . `@@@@@@@@@@@@@@@@@@@@@@@@a 
+            ;`@@@@@@@@@@@@@@@@@@'   .   `@@@@@@@@@@@@@@@@@@@@@'; 
+            ;@@@`@@@@@@@@@@@@@'     .     `@@@@@@@@@@@@@@@@'@@@; 
+            ;@@@;,.aaaaaaaaaa       .       aaaaa,,aaaaaaa,;@@@; 
+            ;;@;;;;@@@@@@@@;@      @.@      ;@@@;;;@@@@@@;;;;@@; 
+            ;;;;;;;@@@@;@@;;@    @@ . @@    ;;@;;;;@@;@@@;;;;;;; 
+            ;;;;;;;;@@;;;;;;;  @@   .   @@  ;;;;;;;;;;;@@;;;;@;; 
+            ;;;;;;;;;;;;;;;;;@@     .     @@;;;;;;;;;;;;;;;;@@a; 
+        ,%%%;;;;;;;;@;;;;;;;;       .       ;;;;;;;;;;;;;;;;@@;;%%%, 
+     .%%%%%%;;;;;;;a@;;;;;;;;     ,%%%,     ;;;;;;;;;;;;;;;;;;;;%%%%%%, 
+    .%%%%%%%;;;;;;;@@;;;;;;;;   ,%%%%%%%,   ;;;;;;;;;;;;;;;;;;;;%%%%%%%, 
+    %%%%%%%%`;;;;;;;;;;;;;;;;  %%%%%%%%%%%  ;;;;;;;;;;;;;;;;;;;'%%%%%%%% 
+    %%%%%%%%%%%%`;;;;;;;;;;;;,%%%%%%%%%%%%%,;;;;;;;;;;;;;;;'%%%%%%%%%%%% 
+    `%%%%%%%%%%%%%%%%%,,,,,,,%%%%%%%%%%%%%%%,,,,,,,%%%%%%%%%%%%%%%%%%%%' 
+      `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%' 
+          `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'                                                                           
+                                                                          
+""")
 fc.typingPrint("Hallo, lass uns eine Schwarzwälder Kirschtorte backen!\nWie ist dein Name?")
 input_name = input()
 fc.typingPrint(f"Wilkommen {input_name}!")
