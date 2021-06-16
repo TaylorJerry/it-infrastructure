@@ -12,7 +12,7 @@ def cancel():
   fc.typingPrint("Möchtest du wirklich beenden? (j) (n)")
   cancel_input = input().lower()
   if cancel_input == "j":
-    fc.typingPrint(f"Schade {input_name} dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fängt mal klein an :-)")
+    fc.typingPrint(f"Schade {input_name}, dass du das Backen jetzt schon beendest! Versuch es später nochmal! Jeder fängt mal klein an :-)")
     sys.exit()
   elif cancel_input == "n":
     menu()
