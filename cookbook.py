@@ -104,10 +104,6 @@ def menu():
       fc.typingPrint(f"{step}: {current_step[step]}")
     menu()
 
-  elif menu_selection == 'asdf': #If asdf is pressed -> open function troll in functions and reload menu
-    fc.troll()
-    menu()
-
   elif menu_selection == 'c': #If credits is pressed -> open function credits in file functions.py and reload menu
     fc.credits()
     menu()
