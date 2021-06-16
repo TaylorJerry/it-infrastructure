@@ -10,14 +10,14 @@ def typingPrint(text):
   for character in text:
     sys.stdout.write(character)
     sys.stdout.flush()
-    time.sleep(0.01)
+    time.sleep(0.03)
   print()
 
 def typingPrintBold(text):
   for character in text:
     sys.stdout.write("\033[1m" + character + "\033[0m")
     sys.stdout.flush()
-    time.sleep(0.01)
+    time.sleep(0.03)
   print()
 
 
@@ -89,19 +89,19 @@ def credits():
   typingPrint("Dieser Kuchenbackhelfer wurde entwickelt von Gruppe 1")
 
   print(r"""
-      ⠀  ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀         
-       ⣹⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡖⠀⠀⠀⠀   
-  ⠀⠀⠀⠀⣰⣿⣿⠟⠁⠀⠈⠉⠉⠉⠁⠀⠉⠻⣿⣿⣷⠀⠀⠀⠀   
+        ⠀  ⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀         
+         ⣹⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡖⠀⠀⠀⠀   
+  ⠀⠀⠀ ⠀⣰⣿⣿⠟⠁⠀⠈⠉⠉⠉⠁⠀⠉⠻⣿⣿⣷⠀⠀⠀⠀   
   ⠀⠀⠀⠀ ⢿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡿⠀⠀⠀⠀    
-  ⠀⠀⠀⠀⢸⣿⡇⠤⠶⠤⣤⡀⠀⢀⣤⠤⠶⠤⢸⣿⡇⠀⠀⠀⠀   
-  ⠀⠀⠀⠀⡇⣿⡇⠸⣹⣿⠳⠀⠀⠀⠚⣿⣏⠇⢸⣿⢳⠀⠀⠀⠀   
+  ⠀⠀ ⠀⠀⢸⣿⡇⠤⠶⠤⣤⡀⠀⢀⣤⠤⠶⠤⢸⣿⡇⠀⠀⠀⠀   
+  ⠀⠀ ⠀⠀⡇⣿⡇⠸⣹⣿⠳⠀⠀⠀⠚⣿⣏⠇⢸⣿⢳⠀⠀⠀⠀   
   ⠀⠀⠀⠀ ⠻⢿⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⣻⠟⠀⠀⠀⠀    
   ⠀⠀⠀⠀ ⠀⠁⠵⠀⠀⠀⠀⠠⠤⠄⠀⠀⠀⠀⠮⠊⠀⠀⠀⠀⠀    
   ⠀⠀⠀⠀ ⠀⠀⠀⢂⠀⠀⠀⠀⠀⠀⠄⠀⠀⡐⠀⠀⠀⠀⠀⠀⠀    
   ⠀⠀⠀⠀ ⠀⠀⠀⠀⠑⢄⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠀⠀    
   ⠀⠀⠀⠀ ⠀⠀⠀⠀⢀⠘⠿⣶⣤⣶⠾⠃⡀⠀⠀⠀⠀⠀⠀⠀⠀  
   ⠀⠀ ⢀⣀⣠⣤⣶⣾⣿⠀⠀⠀⠀⠀⠀⠀⣿⣷⣶⣤⣄⣀⡀⠀⠀ 
-  ⣰⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⢼⣿⠇⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣆ Daniel Schönfeld
+   ⣰⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⢼⣿⠇⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣆ Daniel Schönfeld
 
   ⠀⠀⠀⠀⢀⣴⣾⠿⠛⠛⠛⠛⠛⠇⠠⣟⠛⠷⣶⣄⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⣾⠏⢁⣤⡶⠖⠒⠒⠀⢀⢀⢸⢿⣦⣬⡙⣇⠀⠀⠀⠀⠀

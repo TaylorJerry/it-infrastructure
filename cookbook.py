@@ -451,7 +451,7 @@ def use_cherries():
 def final_assembly():
   current_step.append("final_assembly")
   fc.typingPrintBold(f"\nJetzt haben wir alle Vorbereitungen getroffen um die Torte zu vollenden.")
-  fc.typingPrint("Dafür brauchst du: 6 EL Kirschwasser, 100 g Schokoraspel")
+  fc.typingPrint("Dafür brauchst du: 6 EL Kirschwasser, 100 g Schokoraspeln")
   fc.typingPrintBold("\nSchritt 1:")
   fc.typingPrint("Etwa 4EL der Sahne in einen Spritzbeutel mit Sterntülle geben und beiseite legen.")
   fc.typingPrint("Zweiten Boden auf den ersten Boden legen und leicht andrücken.")
