@@ -4,9 +4,6 @@ Realizing a cooking helper with docker!
 ## Design
 ![desing](https://github.com/danielschoenfeld/infrastruktur_diagram/blob/main/Infrastruktur.svg)
 
-##  Documents
-- documentation will follow soon
-
 ## Links
 - https://www.docker.com/101-tutorial
 - https://hub.docker.com/
